@@ -19,8 +19,6 @@ import time
 from gensim.models import Word2Vec, FastText
 import glob
 
-
-
 start_time = time.time()
 gensim_version = gensim.__version__
 
@@ -50,29 +48,13 @@ ft_index.load("../data/fasttext_annoy_index.ann")
 with open("../data/index_map.pkl", "rb") as fin:
     index_map = pickle.load(fin)
 
-
-
-
-# def get_response(question, index, model, index_map, morpher, sw, exclude, vec_len):
-#     question = preprocess_txt(question, morpher, sw, exclude)
-#     vector = np.zeros(vec_len)
-#     norm = 0
-#     for word in question:
-#         if word in model.wv:
-#             vector += model.wv[word]
-#             norm += 1
-#     if norm > 0:
-#         vector = vector / norm
-#     answers = index.get_nns_by_vector(vector, 3)
-#     return [index_map[i] for i in answers]
-
 print("Бот Анатолий загрузился за %.2f секунд, и готов к беседе.\n" % (time.time() - start_time))
 
 username = input("Представьтесь, пожалуйста: ")
 print()
-print("*"*75, "Задавайте свои вопросы, или поддерживайте беседу. Наберите \'хватит\' для конца диалога:", "*"*75, sep="\n")
+print("*" * 75, "Задавайте свои вопросы, или поддерживайте беседу. Наберите \'хватит\' для конца диалога:", "*" * 75,
+      sep="\n")
 while True:
-    # print("%s: " % username, end="")
     TEXT = input("\n%s: " % username)
     if TEXT.lower() == "хватит":
         print("\nАнатолий: До свидания! Приятно было пообщаться")
@@ -83,13 +65,3 @@ while True:
 
     answer_FT = get_response(TEXT, ft_index, modelFT, index_map, morpher, sw, exclude, modelFT_vector_size)
     print("\nАнатолий FT: ", random.choice(answer_FT).strip(), flush=True)
-
-# TEXT = "когда сменится президент"
-# print(TEXT, "\n")
-#
-#
-# print("W2V response:", get_response(TEXT, w2v_index, modelW2V, index_map, morpher, sw, exclude, modelW2V_vector_size))
-# print()
-# print()
-# print("FT response:", get_response(TEXT, ft_index, modelFT, index_map, morpher, sw, exclude, modelFT_vector_size))
-#
