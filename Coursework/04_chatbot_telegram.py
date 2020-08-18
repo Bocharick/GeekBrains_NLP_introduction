@@ -84,15 +84,6 @@ def startCommand(bot, update):
 
 
 def textMessage(bot, update):
-    response = 'Ваше сообщение принял ' + update.message.text  # формируем текст ответа
-    bot.send_message(chat_id=update.message.chat_id, text=response)
-
-
-def startCommand(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text='Добрый день')
-
-
-def textMessage(bot, update):
     TEXT = update.message.text
     if TEXT == "абырвалг":
         bot.send_message(chat_id=update.message.chat_id, text='откуда ты знаешь пароль, падла?')
